@@ -9,7 +9,12 @@ var Player = {gold: 0, power: 0, streak: 0, accuracy: 0, totalMatches: 0,
 function initializeApp() {
   populateCards(radomizeCardArr());
   $('.card').on('click', clickHandler);
+  $('.card').mouseenter(playCardHover);
   $('.arrow_container').on('click', menubarHandler);
+  $('.modal_button').on('click', function ()
+  { $('.win_modal_container').css('display', 'none'); })
+  $('.player_stats').on('click', togglePlayerMenu);
+  $('.close').on('click',togglePlayerMenu);
 }
 
 function clickHandler(event) {
@@ -17,8 +22,12 @@ function clickHandler(event) {
   winChecker();
 }
 
+function togglePlayerMenu() {
+  $('.player_stats_container').toggleClass('show');
+}
+
 function menubarHandler() {
-  $('.menu_container').toggleClass('menubar_show');
+  $('.menu_container').toggleClass('show');
   $('.arrow_right').toggleClass('rotation');
 }
 
@@ -73,14 +82,11 @@ function isMatch(event) {
 }
 
 function winChecker() {
-  if(Game.matches === 1) {
+  if(Game.matches === 12) {
     setTimeout(function () {
       $('.card_inner').removeClass('card_flipped');
     }, 500);
     $('.win_modal_container').css('display', 'flex');
-    setTimeout(function () {
-      $('.win_modal_container').css('display', 'none');
-    }, 4000);
     Game.matches = 0;
   }
 }
@@ -125,5 +131,12 @@ function radomizeCardArr() {
 
 function playAudio(file) {
   var sound = new Audio('../assets/audio/' + file + '.wav');
+  sound.volume = 0.75;
+  sound.play();
+}
+
+function playCardHover() {
+  var sound = new Audio('../assets/audio/card_hover.wav');
+  sound.volume = 0.05;
   sound.play();
 }
