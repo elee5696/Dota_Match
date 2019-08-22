@@ -3,16 +3,23 @@ $(document).ready(initializeApp);
 var randomPaths = radomizeCardArr();
 
 var Game = {firstCard: 0, secondCard: null, matches: 0};
-var Player = {gold: 0, power: 0, streak: 0};
+var Player = {gold: 0, power: 0, streak: 0, accuracy: 0, totalMatches: 0,
+              totalGold: 0, totalAttempts: 0};
 
 function initializeApp() {
   populateCards(radomizeCardArr());
   $('.card').on('click', clickHandler);
+  $('.arrow_container').on('click', menubarHandler);
 }
 
 function clickHandler(event) {
   cardFlip(event);
   winChecker();
+}
+
+function menubarHandler() {
+  $('.menu_container').toggleClass('menubar_show');
+  $('.arrow_right').toggleClass('rotation');
 }
 
 function cardFlip(event) {
@@ -34,42 +41,47 @@ function compareCard() {
 }
 
 function addGold() {
+  playAudio('coins');
   Player.gold += 10;
+  Player.totalGold += 10;
   $('.gold_counter').text(Player.gold);
 }
 
 function isMatch(event) {
   $(Game.firstCard).find('.card_inner').toggleClass('card_validation');
   $(Game.secondCard).find('.card_inner').toggleClass('card_validation');
-  if (!(Game.firstCard === Game.secondCard)) {
     if (!(Game.firstCard.find('.back').css('background-image') ===
-      Game.secondCard.find('.back').css('background-image'))) {
-      setTimeout(function () {
-        $(Game.firstCard).find('.card_inner').toggleClass('card_flipped');
-        $(Game.secondCard).find('.card_inner').toggleClass('card_flipped');
-        $(Game.firstCard).find('.card_inner').toggleClass('card_validation');
-        $(Game.secondCard).find('.card_inner').toggleClass('card_validation');
-        var storage = [];
-        storage.push()
-        Game.firstCard = 0;
-        Game.secondCard = null;
-      }, 500);
-    } else {
-      addGold();
-      Game.matches++;
+    Game.secondCard.find('.back').css('background-image'))) {
+    Player.totalAttempts++;
+    setTimeout(function () {
+      $(Game.firstCard).find('.card_inner').toggleClass('card_flipped');
+      $(Game.secondCard).find('.card_inner').toggleClass('card_flipped');
       $(Game.firstCard).find('.card_inner').toggleClass('card_validation');
       $(Game.secondCard).find('.card_inner').toggleClass('card_validation');
       Game.firstCard = 0;
       Game.secondCard = null;
-    }
+    }, 500);
+  } else {
+    addGold();
+    Game.matches++;
+    Player.totalMatches++;
+    $(Game.firstCard).find('.card_inner').toggleClass('card_validation');
+    $(Game.secondCard).find('.card_inner').toggleClass('card_validation');
+    Game.firstCard = 0;
+    Game.secondCard = null;
   }
 }
 
 function winChecker() {
-  if(Game.matches === 12) {
+  if(Game.matches === 1) {
     setTimeout(function () {
       $('.card_inner').removeClass('card_flipped');
-    }, 500)
+    }, 500);
+    $('.win_modal_container').css('display', 'flex');
+    setTimeout(function () {
+      $('.win_modal_container').css('display', 'none');
+    }, 4000);
+    Game.matches = 0;
   }
 }
 
@@ -109,4 +121,9 @@ function radomizeCardArr() {
 
   tempArr.unshift(null);
   return tempArr;
+}
+
+function playAudio(file) {
+  var sound = new Audio('../assets/audio/' + file + '.wav');
+  sound.play();
 }
