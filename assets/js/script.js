@@ -9,7 +9,7 @@ var Player = {gold: 0, power: 0, streak: 0, accuracy: 0, totalMatches: 0,
 function initializeApp() {
   populateCards(radomizeCardArr());
   $('.card').on('click', clickHandler);
-  $('.card').mouseenter(playCardHover);
+  $('.card').on('click', playCardClick);
   $('.arrow_container').on('click', menubarHandler);
   $('.modal_button').on('click', function ()
   { $('.win_modal_container').css('display', 'none'); })
@@ -50,7 +50,7 @@ function compareCard() {
 }
 
 function addGold() {
-  playAudio('coins');
+  playConfirm();
   Player.gold += 10;
   Player.totalGold += 10;
   $('.gold_counter').text(Player.gold);
@@ -63,36 +63,41 @@ function isMatch(event) {
     Game.secondCard.find('.back').css('background-image'))) {
     Player.totalAttempts++;
     setTimeout(function () {
+      playErrorSound();
       $(Game.firstCard).find('.card_inner').toggleClass('card_flipped');
       $(Game.secondCard).find('.card_inner').toggleClass('card_flipped');
       $(Game.firstCard).find('.card_inner').toggleClass('card_validation');
       $(Game.secondCard).find('.card_inner').toggleClass('card_validation');
       Game.firstCard = 0;
       Game.secondCard = null;
-    }, 500);
-  } else {
-    addGold();
-    Game.matches++;
-    Player.totalMatches++;
-    $(Game.firstCard).find('.card_inner').toggleClass('card_validation');
-    $(Game.secondCard).find('.card_inner').toggleClass('card_validation');
-    Game.firstCard = 0;
-    Game.secondCard = null;
+    }, 600);
+    } else {
+      addGold();
+      Game.matches++;
+      Player.totalMatches++;
+      $(Game.firstCard).find('.card_inner').toggleClass('card_validation');
+      $(Game.secondCard).find('.card_inner').toggleClass('card_validation');
+      $(Game.firstCard).find('.back').toggleClass('is_matched');
+      $(Game.secondCard).find('.back').toggleClass('is_matched');
+      Game.firstCard = 0;
+      Game.secondCard = null;
   }
 }
 
 function winChecker() {
   if(Game.matches === 12) {
     setTimeout(function () {
+      $('.win_modal_container').css('display', 'flex');
       $('.card_inner').removeClass('card_flipped');
+      $('.back').removeClass('is_matched');
+      populateCards(radomizeCardArr());
     }, 500);
-    $('.win_modal_container').css('display', 'flex');
     Game.matches = 0;
   }
 }
 
 function populateCards(arr) {
-  var i = 1;
+  var i = 0;
   $('.card .back').each(function (index) {
     $(this).css('background-image', 'url(' + arr[i] + ')');
     i++;
@@ -100,43 +105,90 @@ function populateCards(arr) {
 }
 
 function radomizeCardArr() {
-  var imgPaths = ['assets/img/items/abyssal_blade.png',
+  var imgPaths = [
+    'assets/img/items/abyssal_blade.png',
     'assets/img/items/aeon_disk.png',
     'assets/img/items/vladmir.png',
-    'assets/img/items/wraith_band.png',
-    'assets/img/items/stout_shield.png',
-    'assets/img/items/soul_ring.png',
     'assets/img/items/silver_edge.png',
     'assets/img/items/skadi.png',
     'assets/img/items/sheepstick.png',
-    'assets/img/items/ring_of_basilius_active.png',
     'assets/img/items/radiance.png',
-    'assets/img/items/dagon_5.png'];
+    'assets/img/items/dagon_5.png',
+    'assets/img/items/armlet.png',
+    'assets/img/items/assault.png',
+    'assets/img/items/bfury.png',
+    'assets/img/items/black_king_bar.png',
+    'assets/img/items/butterfly.png',
+    'assets/img/items/crimson_guard.png',
+    'assets/img/items/desolator.png',
+    'assets/img/items/diffusal_blade_2.png',
+    'assets/img/items/ethereal_blade.png',
+    'assets/img/items/force_staff.png',
+    'assets/img/items/glimmer_cape.png',
+    'assets/img/items/guardian_greaves.png',
+    'assets/img/items/hand_of_midas.png',
+    'assets/img/items/heart.png',
+    'assets/img/items/heavens_halberd.png',
+    'assets/img/items/helm_of_the_dominator.png',
+    'assets/img/items/hurricane_pike.png',
+    'assets/img/items/lotus_orb.png',
+    'assets/img/items/meteor_hammer.png',
+    'assets/img/items/moon_shard.png',
+    'assets/img/items/necronomicon_3.png',
+    'assets/img/items/nullifier.png',
+    'assets/img/items/rapier.png',
+    'assets/img/items/refresher.png',
+    'assets/img/items/sange_and_yasha.png',
+    'assets/img/items/satanic.png',
+    'assets/img/items/shivas_guard.png',
+    'assets/img/items/sphere.png'];
 
-  var tempArr = imgPaths.concat(imgPaths);
-  var reaminingCount = imgPaths.length
-  var tempNumber = 0;
-  var index = 0;
+  var randomArr = shuffleDeck(imgPaths);
+  randomArr = shuffleDeck(randomArr.slice(0,12));
 
-  while (reaminingCount) {
-    index = Math.floor(Math.random() * reaminingCount--);
-    tempNumber = tempArr[reaminingCount];
-    tempArr[reaminingCount] = tempArr[index];
-    tempArr[index] = tempNumber;
+  randomArr = randomArr.concat(randomArr);
+  randomArr = shuffleDeck(randomArr);
+
+  return randomArr;
+}
+
+function shuffleDeck(arr) {
+  var rand, temp, i;
+
+  for (i = arr.length - 1; i > 0; i -= 1) {
+    rand = Math.floor((i + 1) * Math.random());
+    temp = arr[rand];
+    arr[rand] = arr[i];
+    arr[i] = temp;
   }
 
-  tempArr.unshift(null);
-  return tempArr;
+  return arr;
 }
 
 function playAudio(file) {
-  var sound = new Audio('../assets/audio/' + file + '.wav');
+  var sound = new Audio('../assets/audio/' + file );
   sound.volume = 0.75;
   sound.play();
 }
 
-function playCardHover() {
+function playCardClick() {
   var sound = new Audio('../assets/audio/card_hover.wav');
   sound.volume = 0.05;
   sound.play();
+}
+
+function playErrorSound() {
+  var errorArr =
+    ['error.mp3',
+    'quack.mp3',];
+    var random = Math.floor((Math.random() * errorArr.length));
+    playAudio(errorArr[random]);
+}
+
+function playConfirm() {
+  var confirmArr =
+    ['coins.wav',
+    'confirm.mp3',];
+  var random = Math.floor((Math.random() * confirmArr.length));
+  playAudio(confirmArr[random]);
 }
