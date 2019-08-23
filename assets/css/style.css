@@ -177,6 +177,8 @@ header img {
   height: 100%;
 }
 
+/*Card Classes*/
+
 .card {
   display: flex;
   width: 90%;
@@ -197,7 +199,7 @@ header img {
   background-color: transparent;
   transition: transform 0.5s;
   transform-style: preserve-3d;
-  border: 0.4rem outset rgba(163, 161, 144, 0.733);
+  border: 0.3rem outset rgba(163, 161, 144, 0.733);
 }
 
 .card_inner:hover {
@@ -246,7 +248,10 @@ header img {
   transition-duration: 1s;
 }
 
-.player_stats_container {
+/*Stat Boxes*/
+/*Player Stats*/
+
+.stats_container {
   display: none;
   position: absolute;
   align-content: center;
@@ -304,6 +309,55 @@ header img {
   width: 50%;
   background-color: rgb(133, 133, 133);
 }
+
+/*Hero Stats*/
+
+.hero_stats_content {
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  width: 50%;
+  margin: auto;
+  box-shadow: 0 0 3rem 1rem rgba(207, 199, 123, 0.274)
+}
+
+.hero_stats_lower_content {
+  display: flex;
+  height: 90%;
+}
+
+.hero_stats_header {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  height: 10%;
+  width: 100%;
+  color: white;
+  background-color: rgb(31, 31, 31);
+}
+
+.hero_stats_header_text {
+  font-size: 2vmax;
+  padding-top: 0.3%;
+  z-index: 3;
+  color: rgb(131, 126, 87);
+}
+
+.hero_stats_box {
+  display: flex;
+  width: 50%;
+  height: 100;
+  background-color: rgb(219, 219, 219);
+}
+
+.hero_stats_badge_container {
+  display: flex;
+  width: 50%;
+  background-color: rgb(133, 133, 133);
+}
+
+/*Toggled Classes*/
 
 .close {
   display: flex;

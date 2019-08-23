@@ -13,8 +13,9 @@ function initializeApp() {
   $('.arrow_container').on('click', menubarHandler);
   $('.modal_button').on('click', function ()
   { $('.win_modal_container').css('display', 'none'); })
-  $('.player_stats').on('click', togglePlayerMenu);
-  $('.close').on('click',togglePlayerMenu);
+  $('.player_stats').on('click', player_stats_open);
+  $('.hero_stats').on('click', hero_stats_open);
+  $('.close').on('click', closeMenu);
 }
 
 function clickHandler(event) {
@@ -22,8 +23,16 @@ function clickHandler(event) {
   winChecker();
 }
 
-function togglePlayerMenu() {
-  $('.player_stats_container').toggleClass('show');
+function player_stats_open(event) {
+  $('.player_stats_content').parent('.stats_container').toggleClass('show');
+}
+
+function hero_stats_open(event) {
+  $('.hero_stats_content').parent('.stats_container').toggleClass('show');
+}
+
+function closeMenu() {
+  $(this).closest('.stats_container').toggleClass('show');
 }
 
 function menubarHandler() {
