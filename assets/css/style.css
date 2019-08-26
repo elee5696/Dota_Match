@@ -49,9 +49,10 @@ header img {
 
 .menu_container {
   display: none;
+  position: absolute;
   flex-direction: row;
   z-index: 3;
-  justify-content: right;
+  justify-content: center;
   width: 99.80%;
   height: 9%;
   background-color: rgb(31, 31, 31);
@@ -87,6 +88,24 @@ header img {
   transition-duration: 0.5s;
 }
 
+.gold_container {
+  display: flex;
+  position: absolute;
+  right: 1%;
+  justify-content: right;
+  align-items: center;
+}
+
+.gold_img {
+  height: 40%;
+}
+
+.gold_counter {
+  display: flex;
+  font-size: 2em;
+  color: white;
+}
+
 .player_stats, .hero_stats,
 .shop_menu_bar {
   display: flex;
@@ -106,24 +125,6 @@ header img {
   color: rgb(207, 199, 123);
   box-shadow: 0px 0px 0.8rem 0.4rem rgba(207, 199, 123, 0.562);
   transition: 0.15s;
-}
-
-.gold_container {
-  display: flex;
-  justify-content: right;
-  width: 32%;
-  align-items: center;
-}
-
-.gold_img {
-  height: 40%;
-  padding-right: 3%;
-}
-
-.gold_counter {
-  display: flex;
-  font-size: 1.5em;
-  color: white;
 }
 
 .win_modal_container {
@@ -146,18 +147,19 @@ header img {
   margin: auto;
   font-size: 1000%;
   color: rgb(192, 192, 192);
-  text-shadow: 0px 0px 50px rgb(0, 255, 0);
+  text-shadow: 0px 0px 50px rgb(129, 255, 129);
 }
 
 .modal_button {
   margin-bottom: 15%;
   font-size: 500%;
-  color: rgb(192, 192, 192);
+  color: rgba(240, 240, 240, 0.589);
   cursor: pointer;
   transition: 0.1s;
 }
 
 .modal_button:hover {
+  color: rgb(239, 255, 226);
   text-shadow: 0px 0px 50px rgb(0, 255, 0);
   transition: 0.1s;
 }
@@ -174,6 +176,8 @@ header img {
   display: flex;
   height: 100%;
 }
+
+/*Card Classes*/
 
 .card {
   display: flex;
@@ -193,10 +197,24 @@ header img {
   height: 100%;
   background-color: transparent;
   transition: transform 0.5s;
+  transition: 0.4s;
   transform-style: preserve-3d;
+  border: 0.3rem outset rgba(163, 161, 144, 0.733);
+}
+
+.card_inner:hover {
+  box-shadow: 0 0 0.6rem 0.2rem rgb(207, 199, 123);
+  transition: 0.5s;
+}
+
+.reset_board {
+  opacity: 0;
+  transition: 1s;
 }
 
 .card_flipped {
+  width: 100%;
+  height: 100%;
   transform: rotateY(180deg);
 }
 
@@ -229,7 +247,17 @@ header img {
   transform: rotateY(180deg);
 }
 
-.player_stats_container {
+.is_matched {
+  box-shadow: 0 0 5rem 2rem inset black;
+  transition-delay: 0.5s;
+  transition-duration: 1s;
+}
+
+
+/*Stat Boxes*/
+/*Player Stats*/
+
+.stats_container {
   display: none;
   position: absolute;
   align-content: center;
@@ -277,16 +305,139 @@ header img {
 
 .player_stats_box {
   display: flex;
+  font-family: Constantia;
+  font-size: 2vmin;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
   width: 50%;
   height: 100;
   background-color: rgb(219, 219, 219);
 }
 
 .player_stats_badge_container {
+  width: 50%;
+  background-color: rgb(133, 133, 133);
+}
+
+.player_stats_badge_container > img {
+  width: 10%;
+}
+
+/*Hero Stats*/
+
+.hero_stats_content {
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  width: 50%;
+  margin: auto;
+  box-shadow: 0 0 3rem 1rem rgba(207, 199, 123, 0.274);
+}
+
+.hero_stats_lower_content {
+  display: flex;
+  height: 90%;
+}
+
+.hero_stats_header {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  height: 10%;
+  width: 100%;
+  color: white;
+  background-color: rgb(31, 31, 31);
+}
+
+.hero_stats_header_text {
+  font-size: 2vmax;
+  padding-top: 0.3%;
+  z-index: 3;
+  color: rgb(131, 126, 87);
+}
+
+.hero_stats_box {
+  display: flex;
+  width: 50%;
+  height: 100;
+  background-color: rgb(219, 219, 219);
+}
+
+.hero_stats_badge_container {
   display: flex;
   width: 50%;
   background-color: rgb(133, 133, 133);
 }
+
+/*Shop Boxes*/
+
+.shop_stats_content {
+  display: flex;
+  flex-direction: column;
+  height: 90%;
+  width: 50%;
+  margin: auto;
+  box-shadow: 0 0 3rem 1rem rgba(207, 199, 123, 0.274);
+}
+
+.shop_stats_lower_content {
+  display: flex;
+  height: 90%;
+}
+
+.shop_stats_header {
+  display: flex;
+  position: relative;
+  justify-content: center;
+  align-items: center;
+  height: 10%;
+  width: 100%;
+  color: white;
+  background-color: rgb(31, 31, 31);
+}
+
+.shop_stats_header_text {
+  font-size: 2vmax;
+  padding-top: 0.3%;
+  z-index: 3;
+  color: rgb(131, 126, 87);
+}
+
+.shop_stats_box {
+  display: flex;
+  position: relative;
+  font-family: Constantia;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  text-align: center;
+  width: 100%;
+  height: 100;
+  color: rgb(189, 180, 116);
+  background-color: rgb(102, 102, 102);
+}
+
+.shop_screen_welcome {
+  margin: 0;
+  margin-top: 5%;
+}
+
+.shop_start_button {
+  font-size: 300%;
+  margin-bottom: 10%;
+}
+
+.shop_screen_image {
+  background-image: url('../img/spellicons/abaddon_aphotic_shield.png');
+  background-size: 100%;
+  background-repeat: no-repeat;
+  height: 50%;
+  width: 25%;
+}
+
+/*Toggled Classes*/
 
 .close {
   display: flex;
