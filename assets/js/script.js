@@ -160,7 +160,7 @@ function player_stats_open(event) {
 
 function hero_stats_open(event) {
   $('.hero_stats_content').parent('.stats_container').toggleClass('show');
-  9, 999}
+}
 
 function shop_stats_open(event) {
   $('.shop_stats_content').parent('.stats_container').toggleClass('show');
