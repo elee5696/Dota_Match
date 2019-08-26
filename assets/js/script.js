@@ -3,7 +3,7 @@ $(document).ready(initializeApp);
 var randomPaths = radomizeCardArr();
 
 var Game = {firstCard: 0, secondCard: null, matches: 0};
-var Player = {gold: 100, totalGold: 0, power: 0, streak: 0, accuracy: 0, totalMatches: 0,
+var Player = {gold: 1000000, totalGold: 0, power: 0, streak: 0, accuracy: 0, totalMatches: 0,
               totalAttempts: 0, badges: []};
 
 var badgeList = [
@@ -321,8 +321,7 @@ function playCardClick() {
 
 function playErrorSound() {
   var errorArr =
-    ['error.mp3',
-    'quack.mp3',];
+    ['error.mp3'];
     var random = Math.floor((Math.random() * errorArr.length));
     playAudio(errorArr[random]);
 }
@@ -351,6 +350,7 @@ function addPlayerBadges() {
       console.log('Out of badges');
     }
   } else {
+    playAudio('quack.mp3');
     console.log("Not enough gold!");
   }
 }
