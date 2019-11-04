@@ -3,8 +3,8 @@ $(document).ready(initializeApp);
 var randomPaths = radomizeCardArr();
 
 var Game = {firstCard: 0, secondCard: null, matches: 0};
-var Player = {gold: 1000000, totalGold: 0, power: 0, streak: 0, accuracy: 0, totalMatches: 0,
-              totalAttempts: 0, badges: []};
+var Player = {gold: 0, totalGold: 0, power: 0, streak: 0, accuracy: 0, totalMatches: 0,
+              totalAttempts: 0, gamesWon: 0, badges: []};
 
 var badgeList = [
   '../assets/img/miniheroes/abaddon.png',
@@ -147,10 +147,15 @@ function player_stats_open(event) {
   var stat = $('.player_stats_box');
   Player.accuracy = (( Player.totalMatches / Player.totalAttempts ) * 100).toFixed(2);
   $('.player_stats_content').parent('.stats_container').toggleClass('show');
+  stat.find('.games_won_stat').text(Player.gamesWon);
   stat.find('.gold_stat').text(Player.totalGold);
   stat.find('.match_stat').text(Player.totalMatches);
   stat.find('.attempts_stat').text(Player.totalAttempts);
-  stat.find('.acc_stat').text(Player.accuracy);
+  if(isNaN(Player.accuracy)) {
+    stat.find('.acc_stat').text('0%');
+  } else {
+    stat.find('.acc_stat').text(Player.accuracy);
+  }
 }
 
 function hero_stats_open(event) {
@@ -235,6 +240,7 @@ function winChecker() {
        { $('.card_inner').toggleClass('reset_board');}, 2000);
     }, 200);
     Game.matches = 0;
+    Game.gamesWon++;
   }
 }
 
