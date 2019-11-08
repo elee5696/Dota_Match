@@ -4,8 +4,8 @@
 }
 
 body {
-  width: 100vw;
-  height: 100vh;
+  width: auto;
+  height: 92vh;
   margin: 0;
   padding: 0;
 }
@@ -231,7 +231,7 @@ header img {
 }
 
 .front {
-  background-image: url(../img/49223.jpg);
+  background-image: url(../img/dota_icon.jpg);
   background-repeat: no-repeat;
   background-color: black;
   background-size: 40%;
@@ -239,7 +239,6 @@ header img {
 }
 
 .back {
-  background-image: url(../img/heroes/luna.png);
   background-repeat: no-repeat;
   background-color: black;
   background-size: cover;
