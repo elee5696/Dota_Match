@@ -3,7 +3,7 @@ $(document).ready(initializeApp);
 var randomPaths = radomizeCardArr();
 
 var Game = {firstCard: 0, secondCard: null, matches: 0};
-var Player = {gold: 0, totalGold: 0, power: 0, streak: 0, accuracy: 0, totalMatches: 0,
+var Player = {gold: 1000, totalGold: 0, power: 0, streak: 0, accuracy: 0, totalMatches: 0,
               totalAttempts: 0, gamesWon: 0, badges: []};
 
 function initializeApp() {
@@ -14,10 +14,9 @@ function initializeApp() {
   $('.modal_button').on('click', function ()
   { $('.win_modal_container').css('display', 'none'); })
   $('.player_stats').on('click', playerStatsOpen);
-  $('.hero_stats').on('click', heroStatsOpen);
   $('.shop_menu_bar').on('click', shopStatsOpen);
   $('.close').on('click', closeMenu);
-  $('.shop_start_button').on('click', addPlayerBadges);
+  $('.shop_buy_button_container').on('click', addPlayerBadges);
 }
 
 function clickHandler(event) {
@@ -38,10 +37,7 @@ function playerStatsOpen(event) {
   } else {
     stat.find('.acc_stat').text(Player.accuracy);
   }
-}
-
-function heroStatsOpen(event) {
-  $('.hero_stats_content').parent('.stats_container').toggleClass('show');
+  $('#root').on('click', handleModal);
 }
 
 function shopStatsOpen(event) {
@@ -49,7 +45,13 @@ function shopStatsOpen(event) {
 }
 
 function closeMenu() {
-  $(this).closest('.stats_container').toggleClass('show');
+  $('.stats_container').removeClass('show');
+}
+
+function handleModal(e) {
+  if (!$(e.target).closest(".shop_stats_content, .player_stats_content, .player_stats, .shop_menu_bar").length)  {
+    closeMenu();
+  }
 }
 
 function menubarHandler() {
@@ -207,7 +209,7 @@ function addPlayerBadges() {
 
 function populateBadges() {
 
-  var badge = $('.player_stats_badge_container');
+  var badge = $('.player_stats_badge_content');
 
   badge.empty();
 

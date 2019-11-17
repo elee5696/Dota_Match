@@ -2,6 +2,8 @@
 <html>
   <head>
     <title>Dota Match</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="height=device-height, initial-scale=1">
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="assets/js/cardList.js"></script>
@@ -9,227 +11,241 @@
     <script src="assets/js/script.js"></script>
   </head>
   <body>
-    <p class="arrow_container">
-      <i class="arrow_right"></i>
-    </p>
-    <header>
-      <img src="assets/img/dota_icon.jpg" alt="DOTA Match">
-      <div class="header_text">DOTA Match</div>
-      <div class="gold_container">
-        <div class="gold_counter">0</div>
-        <img src="assets/img/Gold_large.png" class="gold_img" alt="Gold:">
+    <div id="root">
+      <header>
+        <p class="arrow_container">
+          <i class="arrow_right"></i>
+        </p>
+        <div class="logo">
+          <img src="assets/img/dota_icon.jpg" alt="DOTA Match">
+          <div class="header_text">DOTA Match</div>
+        </div>
+        <div class="gold_container">
+          <div class="gold_counter">0</div>
+          <img src="assets/img/Gold_large.png" class="gold_img" alt="Gold:">
+        </div>
+      </header>
+      <div class="menu_container">
+        <div class="player_stats">Player</div>
+        <div class="shop_menu_bar">Shop</div>
       </div>
-    </header>
-    <div class="menu_container">
-      <div class="player_stats">Player</div>
-      <div class="shop_menu_bar">Shop</div>
-    </div>
-    <div class="page_container">
-      <div class="win_modal_container">
-        <div class="win_modal">RADIANT VICTORY</div>
-        <div class="modal_button">RESET</div>
-      </div>
-      <div class="stats_container">
-        <div class="player_stats_content">
-          <div class="player_stats_header">
-            <div class="player_stats_header_text">Player Stats</div>
-            <div class="close">&times;</div>
-          </div>
-          <div class="player_stats_lower_content">
-            <div class="player_stats_box">
-              <h2 class="games_won">Games Won</h2>
-              <p class="games_won_stat">0</p>
-              <h2 class="total_gold_header">Lifetime Gold</h2>
-              <p class="gold_stat">0</p>
-              <h2 class="total_matches_header">Total Matches</h2>
-              <p class="match_stat">0</p>
-              <h2 class="total_attempts_made">Total Attempts</h2>
-              <p class="attempts_stat">0</p>
-              <h2 class="acc_stat_header">Lifetime Accuracy</h3>
-              <p class="acc_stat">0%</p>
+      <div class="page_container">
+        <div class="win_modal_container">
+          <div class="win_modal">RADIANT VICTORY</div>
+          <div class="modal_button">RESET</div>
+        </div>
+        <div class="stats_container">
+          <div class="player_stats_content">
+            <div class="player_stats_header">
+              <div class="player_stats_header_text">Player Stats</div>
+              <div class="close">&times;</div>
             </div>
-            <div class="player_stats_badge_container">
+            <div class="player_stats_lower_content">
+              <div class="player_stats_box">
+                <h2 class="games_won">Games Won</h2>
+                <p class="games_won_stat">0</p>
+                <h2 class="total_gold_header">Lifetime Gold</h2>
+                <p class="gold_stat">0</p>
+                <h2 class="total_matches_header">Total Matches</h2>
+                <p class="match_stat">0</p>
+                <h2 class="total_attempts_made">Total Attempts</h2>
+                <p class="attempts_stat">0</p>
+                <h2 class="acc_stat_header">Lifetime Accuracy</h3>
+                  <p class="acc_stat">0%</p>
+              </div>
+              <div class="player_stats_badge_container">
+                <h2 class="player_stats_badge_header">Badges</h2>
+                <div class="player_stats_badge_content"></div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="stats_container">
-        <div class="shop_stats_content">
-          <div class="shop_stats_header">
-            <div class="shop_stats_header_text">Shop</div>
-            <div class="close">&times;</div>
-          </div>
-          <div class="shop_stats_lower_content">
-            <div class="shop_stats_box">
-              <h1 class="shop_screen_welcome">Buy A Random Badge!</h1>
-              <div class="shop_screen_image"></div>
-              <div class="shop_start_button">Buy</div>
+        <div class="stats_container">
+          <div class="shop_stats_content">
+            <div class="shop_stats_header">
+              <div class="shop_stats_header_text">Shop</div>
+              <div class="close">&times;</div>
+            </div>
+            <div class="shop_stats_lower_content">
+              <div class="shop_stats_box">
+                <div class="shop_screen_welcome">Buy A Badge for Your Profile</div>
+                <div class="shop_screen_image"></div>
+                <div class="shop_buy_button_container">
+                  <div class="shop_buy_button_img">
+                    <img src="assets/img/Gold_large.png" alt="Gold:">
+                    <div>-50</div>
+                  </div>
+                  <div class="shop_buy_button_text">
+                    Buy
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-      <div class="stats_container">
-        <div class="hero_stats_content">
-          <div class="hero_stats_header">
-            <div class="hero_stats_header_text">Hero Stats</div>
-            <div class="close">&times;</div>
-          </div>
-          <div class="hero_stats_lower_content">
-            <div class="hero_stats_box"></div>
-            <div class="hero_stats_badge_container"></div>
-          </div>
-        </div>
-      </div>
-      <div class="main_container">
-        <div class="rows">
-          <div class="card">
-            <div class="card_inner">
-              <div class="front"></div>
-              <div class="back"></div>
+        <div class="stats_container">
+          <div class="hero_stats_content">
+            <div class="hero_stats_header">
+              <div class="hero_stats_header_text">Hero Stats</div>
+              <div class="close">&times;</div>
             </div>
-          </div>
-          <div class="card">
-            <div class="card_inner">
-              <div class="front"></div>
-              <div class="back"></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card_inner">
-              <div class="front"></div>
-              <div class="back"></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card_inner">
-              <div class="front"></div>
-              <div class="back"></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card_inner">
-              <div class="front"></div>
-              <div class="back"></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card_inner">
-              <div class="front"></div>
-              <div class="back"></div>
+            <div class="hero_stats_lower_content">
+              <div class="hero_stats_box"></div>
+              <div class="hero_stats_badge_container"></div>
             </div>
           </div>
         </div>
-        <div class="rows">
-          <div class="card">
-            <div class="card_inner">
-              <div class="front"></div>
-              <div class="back"></div>
+        <div class="main_container">
+          <div class="rows">
+            <div class="card">
+              <div class="card_inner">
+                <div class="front"></div>
+                <div class="back"></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card_inner">
+                <div class="front"></div>
+                <div class="back"></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card_inner">
+                <div class="front"></div>
+                <div class="back"></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card_inner">
+                <div class="front"></div>
+                <div class="back"></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card_inner">
+                <div class="front"></div>
+                <div class="back"></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card_inner">
+                <div class="front"></div>
+                <div class="back"></div>
+              </div>
             </div>
           </div>
-          <div class="card">
-            <div class="card_inner">
-              <div class="front"></div>
-              <div class="back"></div>
+          <div class="rows">
+            <div class="card">
+              <div class="card_inner">
+                <div class="front"></div>
+                <div class="back"></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card_inner">
+                <div class="front"></div>
+                <div class="back"></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card_inner">
+                <div class="front"></div>
+                <div class="back"></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card_inner">
+                <div class="front"></div>
+                <div class="back"></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card_inner">
+                <div class="front"></div>
+                <div class="back"></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card_inner">
+                <div class="front"></div>
+                <div class="back"></div>
+              </div>
             </div>
           </div>
-          <div class="card">
-            <div class="card_inner">
-              <div class="front"></div>
-              <div class="back"></div>
+          <div class="rows">
+            <div class="card">
+              <div class="card_inner">
+                <div class="front"></div>
+                <div class="back"></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card_inner">
+                <div class="front"></div>
+                <div class="back"></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card_inner">
+                <div class="front"></div>
+                <div class="back"></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card_inner">
+                <div class="front"></div>
+                <div class="back"></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card_inner">
+                <div class="front"></div>
+                <div class="back"></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="card_inner">
+                <div class="front"></div>
+                <div class="back"></div>
+              </div>
             </div>
           </div>
-          <div class="card">
-            <div class="card_inner">
-              <div class="front"></div>
-              <div class="back"></div>
+          <div class="rows">
+            <div class="card">
+              <div class="card_inner">
+                <div class="front"></div>
+                <div class="back"></div>
+              </div>
             </div>
-          </div>
-          <div class="card">
-            <div class="card_inner">
-              <div class="front"></div>
-              <div class="back"></div>
+            <div class="card">
+              <div class="card_inner">
+                <div class="front"></div>
+                <div class="back"></div>
+              </div>
             </div>
-          </div>
-          <div class="card">
-            <div class="card_inner">
-              <div class="front"></div>
-              <div class="back"></div>
+            <div class="card">
+              <div class="card_inner">
+                <div class="front"></div>
+                <div class="back"></div>
+              </div>
             </div>
-          </div>
-        </div>
-        <div class="rows">
-          <div class="card">
-            <div class="card_inner">
-              <div class="front"></div>
-              <div class="back"></div>
+            <div class="card">
+              <div class="card_inner">
+                <div class="front"></div>
+                <div class="back"></div>
+              </div>
             </div>
-          </div>
-          <div class="card">
-            <div class="card_inner">
-              <div class="front"></div>
-              <div class="back"></div>
+            <div class="card">
+              <div class="card_inner">
+                <div class="front"></div>
+                <div class="back"></div>
+              </div>
             </div>
-          </div>
-          <div class="card">
-            <div class="card_inner">
-              <div class="front"></div>
-              <div class="back"></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card_inner">
-              <div class="front"></div>
-              <div class="back"></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card_inner">
-              <div class="front"></div>
-              <div class="back"></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card_inner">
-              <div class="front"></div>
-              <div class="back"></div>
-            </div>
-          </div>
-        </div>
-        <div class="rows">
-          <div class="card">
-            <div class="card_inner">
-              <div class="front"></div>
-              <div class="back"></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card_inner">
-              <div class="front"></div>
-              <div class="back"></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card_inner">
-              <div class="front"></div>
-              <div class="back"></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card_inner">
-              <div class="front"></div>
-              <div class="back"></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card_inner">
-              <div class="front"></div>
-              <div class="back"></div>
-            </div>
-          </div>
-          <div class="card">
-            <div class="card_inner">
-              <div class="front"></div>
-              <div class="back"></div>
+            <div class="card">
+              <div class="card_inner">
+                <div class="front"></div>
+                <div class="back"></div>
+              </div>
             </div>
           </div>
         </div>
